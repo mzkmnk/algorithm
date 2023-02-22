@@ -1,0 +1,2 @@
+vector arr.at().at()を[]で書いたときエラーを出すためのinclude
+#define _GLIBCXX_DEBUG
