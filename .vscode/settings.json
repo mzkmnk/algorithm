@@ -4,6 +4,7 @@
         "iostream": "cpp",
         "vector": "cpp",
         "complex": "cpp",
-        "valarray": "cpp"
+        "valarray": "cpp",
+        "algorithm": "cpp"
     }
 }
