@@ -5,6 +5,7 @@
         "vector": "cpp",
         "complex": "cpp",
         "valarray": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "bitset": "cpp"
     }
 }

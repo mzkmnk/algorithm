@@ -13,7 +13,6 @@ int main(){
             int r = l + LEN - 1;
             
             int score1 = 0;
-            if(l <=)
         }
     }
     return 0;
