@@ -21,6 +21,7 @@ int main(){
         }
     }
     sort(result.begin(),result.end());
+    cout << result.size() << endl;
     for(int i = 0; i < result.size(); i++) cout << result.at(i) << " ";
     cout << endl;
     return 0;
