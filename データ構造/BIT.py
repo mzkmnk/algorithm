@@ -1,4 +1,14 @@
 class BinaryIndexedTree:
+    """
+    Binary Indexed Tree (Fenwick Tree)
+    1-indexed であることに注意
+    使い方:
+        bit = BinaryIndexedTree(n)
+        bit.add(i, x): i 番目の要素に x を足す
+        bit.sum(i): 区間 [0, i) の総和を求める
+        bit.get(i, j): 区間 [i, j) の総和を求める
+        bit.lower_bound(x): 区間 [0, x) の総和が x 以上になる最小の index を求める
+    """
     def __init__(self, init: int or list):
         if isinstance(init, int):
             self.n = init
