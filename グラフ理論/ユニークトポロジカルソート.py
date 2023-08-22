@@ -28,4 +28,4 @@ def unique_topo_sort(g, n):
 
     if len(order) == n:
         return order
-    return -1
+    return False
