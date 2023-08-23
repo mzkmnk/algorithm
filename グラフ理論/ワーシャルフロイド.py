@@ -15,6 +15,10 @@ def warshall_floyd(dist, cost, cost_matrix, max_num):
     V = len(dist)  # ノードの数
     has_negative_cycle = False  # 負の閉路が存在するかどうか
 
+    for i in range(V):
+        dist[i][i]=0
+        cost[i][i]=cost_matrix[i]
+
     # ワーシャル-フロイドのアルゴリズムの実行
     for k in range(V):
         for i in range(V):
@@ -36,3 +40,24 @@ def warshall_floyd(dist, cost, cost_matrix, max_num):
             break
 
     return dist, cost, has_negative_cycle
+
+
+#--------sample code--------
+V,E=map(int,input().split())
+dist=[[float("inf") for _ in range(V)] for _ in range(V)]
+cost=[[0 for _ in range(V)] for _ in range(V)]
+for _ in range(E):
+    s,t,d=map(int,input().split())
+    dist[s][t]=d
+d,c,j=warshall_floyd(dist,cost,[0]*V,float('inf'))
+if j:print("Negative cycle")
+else:
+    for i in range(V):
+        for j in range(V):
+            if d[i][j]==float("inf"):
+                if(j==V-1):print("INF")
+                else:print("INF",end=" ")
+            else:
+                if(j==V-1):print(d[i][j])
+                else:print(d[i][j],end=" ")
+
