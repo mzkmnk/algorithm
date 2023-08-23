@@ -1,27 +1,38 @@
-def warshall_floyd(graph):
+def warshall_floyd(dist, cost, cost_matrix, max_num):
     """
-    ワーシャル-フロイドのアルゴリズムを用いて、与えられたグラフの全点対間最短路を計算し、
-    負の閉路の存在をチェックする。
+    ワーシャル-フロイドのアルゴリズムで全点対最短距離と最大コストを計算する。
+    さらに、負の閉路が存在するかも判定する。
     
     Args:
-        graph (list of list of int): 初期化したグラフ。点iからjまでの距離を入れる（距離がない場合はfloat('inf')）。
+        dist (list of list of int): 各点から各点への最短距離を格納した2次元リスト。
+        cost (list of list of int): 各点から各点への最大コストを格納した2次元リスト。
+        cost_matrix (list of int): 各ノードのコストが格納されたリスト。
+        max_num (int or float): 初期の最大距離値（通常は無限大を表す値）
 
     Returns:
-        bool: 負のサイクルがある場合はFalse、ない場合はTrue。
-
-    Note:
-        計算量はO(|V|^3)である。関数の副作用として、graph[i][j]にiからjへの最短路のコストが格納される。
+        tuple: 計算後の最短距離と最大コストが格納された2次元リストと負の閉路の有無（dist, cost, has_negative_cycle）。
     """
-    V = len(graph)
-    # 自分自身を0に置く
-    for i in range(V):
-        graph[i][i] = 0
+    V = len(dist)  # ノードの数
+    has_negative_cycle = False  # 負の閉路が存在するかどうか
+
+    # ワーシャル-フロイドのアルゴリズムの実行
     for k in range(V):
         for i in range(V):
             for j in range(V):
-                graph[i][j] = min(graph[i][j], graph[i][k] + graph[k][j])
-    # 負のサイクルがあるかどうか判断　ある場合はFalse、ない場合はTrue
+                if dist[i][k] == max_num or dist[k][j] == max_num:
+                    continue  # 有効な経路がない場合、スキップ
+                
+                new_d = dist[i][k] + dist[k][j]  # 新しい距離
+                new_c = cost[i][k] + cost[k][j] - cost_matrix[k]  # 新しいコスト
+                
+                if new_d < dist[i][j] or (new_d == dist[i][j] and new_c > cost[i][j]):
+                    dist[i][j] = new_d  # 距離を更新
+                    cost[i][j] = new_c  # コストを更新
+
+    # 負の閉路の検出
     for i in range(V):
-        if graph[i][i] < 0:
-            return False
-    return True
+        if dist[i][i] < 0:
+            has_negative_cycle = True  # 負の閉路が見つかった
+            break
+
+    return dist, cost, has_negative_cycle
