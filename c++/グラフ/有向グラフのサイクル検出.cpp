@@ -59,7 +59,8 @@ int N,M;
 unordered_map<int,vector<int>> graph;
 
 
-
+//-----サンプルコード-----
+//cycleの中身は頂点番号
 int main()
 {
     ios::sync_with_stdio(false);
