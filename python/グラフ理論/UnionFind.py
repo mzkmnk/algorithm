@@ -24,7 +24,7 @@ class UnionFind:
 
         return r
 
-    def union(self, x: int, y: int) -> bool:
+    def merge(self, x: int, y: int) -> bool:
         """x, yが属する木をunion. same(x, y), つまりunionしたかを返す"""
         x = self.find(x)
         y = self.find(y)
