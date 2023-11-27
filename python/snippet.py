@@ -17,15 +17,6 @@ import sys
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
-# pypy用
-# from pypyjit import set_param
-# set_param('max_unroll_recursion=0')
-# import numpy as np
-# from math import isqrt, prod
-# from functools import cache
-# @cache
-
-
 def STR(): return input().rstrip()
 def INT(): return int(input())
 def MAP(): return map(int, input().split())
