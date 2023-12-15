@@ -1,7 +1,14 @@
+from bs4 import BeautifulSoup
+import pandas as pd
 from reportlab.lib.pagesizes import letter
-from reportlab.pdfgen import canvas
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 from reportlab.lib import colors
+
+# HTMLを解析してテーブルデータを取得する関数
+def extract_table_from_html(html):
+    soup = BeautifulSoup(html, 'html.parser')
+    tables = soup.find_all('table')
+    return [pd.read_html(str(table))[0] for table in tables]
 
 # ReportLabを使用してPDFにテーブルを追加する関数
 def create_pdf_with_table(html, file_path):
@@ -34,6 +41,24 @@ def create_pdf_with_table(html, file_path):
 
     # PDFに要素を追加して保存
     doc.build(elements)
+
+# HTMLデータの例
+html = """
+<table>
+    <tr>
+        <th>名前</th>
+        <th>年齢</th>
+    </tr>
+    <tr>
+        <td>Tanaka</td>
+        <td>30</td>
+    </tr>
+    <tr>
+        <td>Suzuki</td>
+        <td>25</td>
+    </tr>
+</table>
+"""
 
 # PDFファイルのパス
 pdf_file_path = "/mnt/data/table_example_reportlab.pdf"
